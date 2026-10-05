@@ -1,0 +1,1587 @@
+
+@{
+    Layout = "_Admin_Layout";
+}
+@{
+    ViewData["ViewName"] = "Hóa đơn";
+}
+
+<style>
+    .table-content {
+        padding: 15px;
+        background: var(--bs-app-header-base-bg-color);
+        border-radius: 8px;
+    }
+
+    table thead tr th {
+        white-space: nowrap;
+    }
+
+    #tableData thead tr th:nth-child(1),
+    #tableData tbody tr td:nth-child(1),
+    #tableData tfoot tr th:nth-child(1) {
+        text-align: center;
+        width: 20px !important;
+        max-width: 20px !important;
+    }
+
+    #tableData thead tr th:nth-child(2),
+    #tableData tbody tr td:nth-child(2),
+    #tableData tfoot tr th:nth-child(2) {
+        width: 200px !important;
+        max-width: 200px !important;
+        padding-left: 20px !important;
+    }
+
+    #tableData thead tr th:nth-child(3),
+    #tableData tbody tr td:nth-child(3),
+    #tableData tfoot tr th:nth-child(3) {
+        width: 150px !important;
+        max-width: 150px !important;
+    @* text-align: center !important; *@
+    }
+
+    #tableData thead tr th:nth-child(4),
+    #tableData tbody tr td:nth-child(4),
+    #tableData tfoot tr th:nth-child(4) {
+        width: 150px !important;
+        max-width: 150px !important;
+    @* text-align: center !important; *@
+    }
+
+    #tableData thead tr th:nth-child(5),
+    #tableData tbody tr td:nth-child(5),
+    #tableData tfoot tr th:nth-child(5) {
+        width: 150px !important;
+        max-width: 150px !important;
+        text-align: center !important;
+    }
+
+    #tableData thead tr th:nth-child(6),
+    #tableData tbody tr td:nth-child(6),
+    #tableData tfoot tr th:nth-child(6) {
+        width: 150px !important;
+        max-width: 150px !important;
+    }
+
+    #tableData thead tr th:nth-child(7),
+    #tableData tbody tr td:nth-child(7),
+    #tableData tfoot tr th:nth-child(7) {
+        width: 50px !important;
+        max-width: 50px !important;
+        text-align: center !important;
+    }
+
+    .table-content {
+        padding: 20px;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 40, 50, 0.15);
+        margin-bottom: 30px;
+    }
+
+    #tableData {
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
+    }
+
+        #tableData th {
+            background-color: #f8f9fa;
+            color: #495057;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            padding: 15px;
+        }
+
+        #tableData td {
+            padding: 15px;
+            vertical-align: middle;
+        }
+
+        #tableData tbody tr {
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+            #tableData tbody tr:hover {
+                background-color: #f8f9fa;
+                transform: translateY(-2px);
+                box-shadow: 0 0.15rem 0.5rem rgba(0, 0, 0, 0.05);
+            }
+
+    .form-control {
+        border-radius: 5px;
+        padding: 10px 15px;
+        border: 1px solid #ced4da;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+        .form-control:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+    .input-group-text {
+        background-color: #f8f9fa;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        border-radius: 5px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+        background-color: #4361ee;
+        border-color: #4361ee;
+    }
+
+        .btn-primary:hover {
+            background-color: #3a56d4;
+            border-color: #3a56d4;
+        }
+
+    .btn-success {
+        background-color: #2ecc71;
+        border-color: #2ecc71;
+    }
+
+        .btn-success:hover {
+            background-color: #27ae60;
+            border-color: #27ae60;
+        }
+
+    .btn-danger {
+        background-color: #e74c3c;
+        border-color: #e74c3c;
+    }
+
+        .btn-danger:hover {
+            background-color: #c0392b;
+            border-color: #c0392b;
+        }
+
+    .modal-content {
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+
+    .modal-header {
+        border-bottom: 1px solid #e9ecef;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .modal-footer {
+        border-top: 1px solid #e9ecef;
+        padding: 15px 20px;
+        background-color: #f8f9fa;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    .card {
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 40, 50, 0.15);
+        margin-bottom: 20px;
+    }
+
+    .card-header {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #e9ecef;
+        padding: 15px 20px;
+        font-weight: 600;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    /* Thiết kế cho bảng chi tiết hóa đơn */
+    #tableInvoiceDetail {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        #tableInvoiceDetail th {
+            background-color: #f8f9fa;
+            color: #495057;
+            font-weight: 600;
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        #tableInvoiceDetail td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        #tableInvoiceDetail tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        #tableInvoiceDetail tfoot td {
+            font-weight: 600;
+            background-color: #f8f9fa;
+            border-top: 2px solid #e9ecef;
+        }
+
+    /* Thiết kế cho QR code */
+    .qr-code-container {
+        text-align: center;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 0.15rem 1.75rem 0 rgba(33, 40, 50, 0.15);
+    }
+
+        .qr-code-container img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+    /* Thiết kế cho badge trạng thái */
+    .badge {
+        padding: 8px 12px;
+        border-radius: 30px;
+        font-weight: 500;
+        font-size: 0.85rem;
+    }
+
+    .badge-success {
+        background-color: #d1f8d9;
+        color: #27ae60;
+    }
+
+    .badge-warning {
+        background-color: #ffefd5;
+        color: #f39c12;
+    }
+
+    .badge-danger {
+        background-color: #fad2d2;
+        color: #e74c3c;
+    }
+
+    /* Thiết kế cho select */
+    .form-select {
+        display: block;
+        width: 100%;
+        padding: 10px 15px;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+        .form-select:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+    /* Thêm hoặc cập nhật CSS sau vào phần style của bạn */
+    .qr-code-container {
+        text-align: center;
+        padding: 15px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 0.15rem 0.5rem rgba(33, 40, 50, 0.1);
+        margin-top: 15px;
+    }
+
+        .qr-code-container img {
+            max-width: 150px; /* Giảm kích thước tối đa xuống 150px */
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .qr-code-container p {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .qr-code-container .small {
+            font-size: 0.8rem;
+        }
+
+    /* CSS cho trang in */
+    @@media print {
+        body *
+
+    {
+        visibility: hidden;
+    }
+
+    .print-content, .print-content * {
+        visibility: visible;
+    }
+
+    .print-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .print-invoice {
+        font-family: 'Times New Roman', serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        line-height: 1.6;
+    }
+
+    .print-header {
+        text-align: center;
+        border-bottom: 2px solid #000;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+    }
+
+    .print-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 10px 0;
+    }
+
+    .print-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+
+    .print-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+    }
+
+        .print-table th,
+        .print-table td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .print-table th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+
+    .print-footer {
+        margin-top: 50px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .signature-box {
+        text-align: center;
+        width: 200px;
+    }
+
+    }
+</style>
+
+<div id="kt_app_content" class="app-content  flex-column-fluid ">
+    <!--begin::Content container-->
+    <div id="kt_app_content_container" class="app-container  container-fluid ">
+        <!--begin::Row-->
+        <div class="table-content">
+            <!--begin::Col-->
+            <!--begin::Wrapper-->
+            <div class="d-flex flex-stack mb-5">
+                <!--begin::Search-->
+                <div class="d-flex align-items-center position-relative my-1">
+                    <i class="ki-duotone ki-magnifier fs-1 position-absolute ms-6"><span class="path1"></span><span class="path2"></span></i>
+                    <input type="search" data-kt-docs-table-filter="search" class="form-control form-control-solid w-250px ps-15" id="search-input" placeholder="Tìm kiếm" />
+                </div>
+                <!--end::Search-->
+                <!--begin::Toolbar-->
+                <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
+                    <!--begin::Filter-->
+                    <button type="button" class="btn btn-light-primary me-3" data-bs-toggle="tooltip" title="Coming Soon">
+                        <i class="ki-duotone ki-filter fs-2"><span class="path1"></span><span class="path2"></span></i>
+                        Bộ lọc
+                    </button>
+                    <!--end::Filter-->
+                    <!--begin::Add customer-->
+                   @*  <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" title="Tạo mới" onclick="editItem(0)">
+                        <i class="ki-duotone ki-plus fs-2"></i>
+                        Tạo mới
+                    </button> *@
+                    <!--end::Add customer-->
+                </div>
+                <!--end::Toolbar-->
+                <!--begin::Group actions-->
+                <div class="d-flex justify-content-end align-items-center d-none" data-kt-docs-table-toolbar="selected">
+                    <div class="fw-bold me-5">
+                        <span class="me-2" data-kt-docs-table-select="selected_count"></span> Selected
+                    </div>
+
+                    <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" title="Coming Soon">
+                        Selection Action
+                    </button>
+                </div>
+                <!--end::Group actions-->
+            </div>
+            <!--end::Wrapper-->
+            <!--begin::Datatable-->
+            <table id="tableData" class="table table-hover table-rounded table-row-bordered gy-3 gs-3">
+                <thead>
+                    <tr class="fw-bold fs-6 text-gray-800">
+                        <th>STT</th>
+                        <th>Mã hóa đơn</th>
+                        @* <th>InvoiceCode</th> *@
+                        <th>Tổng tiền</th>
+                        <th>Trạng thái</th>
+                        <th>Phương thức thanh toán</th>
+                        <th>Người tạo</th>
+                        <th>Ngày tạo</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr class="fs-6">
+                        <th></th>
+                        <th><input type="text" class="form-control tableheaderFillter" /></th>
+                        @* <th><input type="text" class="form-control tableheaderFillter" /></th> *@
+                        <th><input type="text" class="form-control tableheaderFillter" /></th>
+                        <th><input type="text" class="form-control tableheaderFillter" disabled/></th>
+                        <th><input type="text" class="form-control tableheaderFillter" /></th>
+                        <th><input type="text" class="form-control tableheaderFillter" /></th>
+                        <th>
+                            <div class="input-group" id="filterCreatedTime" data-td-target-input="nearest" data-td-target-toggle="nearest">
+                                <input id="filterCreatedTime_input" readonly type="text" class="form-control tableheaderFillter" data-td-target="#filterCreatedTime" />
+                                <span class="input-group-text" title="Chọn" id="open-flatpickr" data-td-target="#filterCreatedTime">
+                                    <i class="ki-duotone ki-calendar fs-2"><span class="path1"></span><span class="path2"></span></i>
+                                </span>
+                                <span class="input-group-text" id="clear-flatpickr" title="Xóa" data-clear="true" data-target="filterCreatedTime">
+                                    <i class="ki-duotone ki-calendar-remove fs-2"><i class="path1"></i><i class="path2"></i><i class="path3"></i><i class="path4"></i><i class="path5"></i><i class="path6"></i></i>
+                                </span>
+                            </div>
+                        </th>
+
+                        <th class="text-center">
+                            <div class="search-control">
+                                <button class="btn btn-primary form-control mb-1" title="Tìm kiếm" id="btnTableSearch">
+                                    <span class="svg-icon svg-icon svg-icon-1 svg_search_2 m-0">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M21.7 18.9L18.6 15.8C17.9 16.9 16.9 17.9 15.8 18.6L18.9 21.7C19.3 22.1 19.9 22.1 20.3 21.7L21.7 20.3C22.1 19.9 22.1 19.3 21.7 18.9Z" fill="currentColor"></path>
+                                            <path opacity="0.3" d="M11 20C6 20 2 16 2 11C2 6 6 2 11 2C16 2 20 6 20 11C20 16 16 20 11 20ZM11 4C7.1 4 4 7.1 4 11C4 14.9 7.1 18 11 18C14.9 18 18 14.9 18 11C18 7.1 14.9 4 11 4ZM8 11C8 9.3 9.3 8 11 8C11.6 8 12 7.6 12 7C12 6.4 11.6 6 11 6C8.2 6 6 8.2 6 11C6 11.6 6.4 12 7 12C7.6 12 8 11.6 8 11Z" fill="currentColor"></path>
+                                        </svg>
+                                    </span>
+                                </button>
+                                <button class="btn btn-secondary form-control" title="Reset" id="btnTableResetSearch">
+                                    <span class="svg-icon svg-icon svg-icon-1 svg_cancel m-0">
+                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect x="9.39844" y="20.7144" width="16" height="2.66667" rx="1.33333" transform="rotate(-45 9.39844 20.7144)" fill="currentColor"></rect>
+                                            <rect x="11.2852" y="9.40039" width="16" height="2.66667" rx="1.33333" transform="rotate(45 11.2852 9.40039)" fill="currentColor"></rect>
+                                        </svg>
+                                    </span>
+                                </button>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr class="border-top fw-bold fs-6 text-gray-800">
+                    </tr>
+                </tfoot>
+            </table>
+            <!--end::Datatable-->
+            <div class="modal fade" id="modal-id">
+                <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="d-flex align-items-center">
+                                <h3 class="modal-title">Thông tin hóa đơn</h3>
+                            </div>
+                            <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="ki-duotone ki-cross fs-1 text-danger"><span class="path1"></span><span class="path2"></span></i>
+                            </div>
+                        </div>
+            <div class="modal-body">
+                <form action="#">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Thông tin hóa đơn</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Mã hóa đơn</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="fas fa-receipt"></i></span>
+                                                    <input type="text" disabled autocomplete="off" class="form-control" id="invoice-invoiceCode">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Ngày tạo</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                                                    <input type="text" autocomplete="off" id="invoice-createdTime" class="form-control datepicker" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Thu ngân</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                    <input type="text" autocomplete="off" class="form-control" id="invoice-accoutId" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Trạng thái thanh toán</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text"><i class="fas fa-check-circle"></i></span>
+                                                    <input type="text" class="form-control" id="invoice-paymentStatus" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3" id="paymentMethodSection">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-label">Phương thức thanh toán</label>
+                                                <select class="form-select" id="invoice-paymentMethod">
+                                                                <option value="Tiền mặt">Tiền mặt</option>
+                                                                <option value="Chuyển khoản">Chuyển khoản</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-none">
+                                        <input type="hidden" id="invoice-id">
+                                        <input type="hidden" id="accoutId">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- QR Code Section -->
+                                        <!-- QR Code Section -->
+                                        <div id="qrCodeSection" class="qr-code-container" style="display: none;">
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-10 col-lg-8">
+                                                    <img id="qrCodeImage" src="" alt="QR Code" class="img-fluid">
+                                                    <p class="mb-1">Quét mã QR để thanh toán</p>
+                                                    <p class="small text-muted">Vietcombank - Số tài khoản: 103138853</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                        </div>
+
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Chi tiết hóa đơn</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table" id="tableInvoiceDetail">
+                                            <thead>
+                                                <tr>
+                                                    <th>Tên sản phẩm</th>
+                                                    <th>Số lượng</th>
+                                                    <th>Giá</th>
+                                                    <th>Thành tiền</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Dữ liệu sẽ được thêm bằng JavaScript -->
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="3" class="text-end">
+                                                        <strong>Tổng thanh toán:</strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong id="invoice-totalMoney"></strong>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Thay thế phần modal-footer hiện tại bằng đoạn mã này -->
+            <div class="modal-footer">
+                            <button type="button" id="btnPrintInvoice" class="btn btn-info">
+                                <i class="fas fa-print me-2"></i>In hóa đơn
+                            </button>
+                <button type="button" id="btnCancelInvoice" class="btn btn-danger" style="display: none;">
+                    <i class="fas fa-times-circle me-2"></i>Hủy hóa đơn
+                </button>
+                <button type="button" id="btnConfirmPayment" class="btn btn-success" style="display: none;">
+                    <i class="fas fa-check-circle me-2"></i>Xác nhận thanh toán
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>Đóng
+                </button>
+            </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Col-->
+        </div>
+    </div>
+    <!--end::Content container-->
+</div>
+<!--begin:Base load data-->
+<script>
+    var showItem = ['id', 'invoiceCode', 'totalMoney', 'paymentStatus', 'paymentMethodId', 'paymentMethodName', 'accountId', "ordererName", 'createdTime'];
+    var dataSource = [];
+    var updatingItemId = 0;
+    var editObj;
+    var tableUpdating = 0;
+    var table;
+  
+    $('#search-input').on("input", function () {
+        table.search($(this).val()).draw();
+    });
+    $(document).ready(function () {
+        // Load data
+        loadData();
+
+        // Datetime picker
+        document.querySelectorAll(".datepicker").forEach(function (item) {
+            new tempusDominus.TempusDominus(item, datePickerOption);
+        })
+        $(".datepicker").on('dp.change', function (e) {
+            // console.log(this.value);
+            this.value = moment(this.value).format("YYYY-MM-DD HH:mm:ss");
+            // console.log(this.value);
+        });
+        //Flat pickr format
+        $("#filterCreatedTime_input").flatpickr({
+            dateFormat: "d/m/Y",
+            mode: "range",
+        });
+        $("#open-flatpickr").click(function () {
+            $("#filterCreatedTime_input").click();
+        });
+        $("#clear-flatpickr").click(function () {
+            $("#filterCreatedTime_input").val("");
+        });
+
+        $('.dataSelect').select2();
+
+
+        $("#btnTableSearch").click(function () {
+            tableSearch();
+        });
+
+        $("#tableData thead:nth-child(2) tr th input").keypress(function (e) {
+            let key = e.which;
+            if (key == 13) {
+                $("#btnTableSearch").click();
+            }
+        });
+        $("#btnTableResetSearch").click(function () {
+            $(".tableheaderFillter").val("").trigger("change");
+            tableSearch();
+        });
+    });
+    function loadData() {
+        initTable();
+    }
+    function initTable() {
+        table = $('#tableData').DataTable({
+            processing: true,
+            serverSide: true,
+            paging: true,
+            searching: { regex: true },
+            order: [1, 'desc'],
+            "oLanguage": {
+                "sUrl": "/js/Vietnamese.json"
+            },
+            ajax: {
+                url: systemURL + "invoice/api/list-server-side",
+                type: "POST",
+                contentType: "application/json",
+                dataType: "json",
+                data: function (d) {
+                    d.searchAll = $("#search-input").val();
+
+                    return JSON.stringify(d);
+                }
+            },
+            columns: [
+                {
+                    data: 'id',
+                    render: function (data, type, row, meta) {
+                        var info = table.page.info();
+                        var stt = meta.row + 1 + info.page * info.length;
+                        return stt; // This contains the row index
+                    }
+                },
+                {
+                    data: "invoiceCode",
+                    render: function (data, type, row, meta) {
+                        return "<span id='row" + row.id + "-column-id' style='font-weight: bold; color: #044688;'>" + data + '<span>';
+                    }
+                },
+                {
+                    data: "totalMoney",
+                    render: function (data, type, row, meta) {
+                        return "<span id='row" + row.id + "-column-id'>" + data + '<span>';
+                    }
+                },
+                 {
+                    data: "paymentStatus",
+                    render: function (data, type, row, meta) {
+                    return "<span id='row" + row.id + "-column-id'>" + data + '<span>';
+                    }
+                },
+                {
+                    data: "paymentMethod",
+                    render: function (data, type, row, meta) {
+                        
+                        return "<span id='row" + row.id + "-column-id'>" + data + '<span>';
+                    }
+                },
+                {
+                    data: "accountId",
+                    render: function (data, type, row, meta) {
+                        return "<span id='row" + row.id + "-column-id'>" + data + '<span>';
+                    }
+                },
+                {
+                    data: "createdTime",
+                    render: function (data) {
+                        var tempDate = new Date(data);
+                        var displayValue = moment(data).format("DD/MM/YYYY HH:mm:ss");
+                        return displayValue;
+                    }
+                },
+
+                {
+                    data: 'id',
+                    render: function (data, type, row, meta) {
+                        return "<div class='d-flex justify-content-center gap-2'>"
+                        // + "<a title='Cập nhật' onclick='editItem(" + row.id + ")' class='me-2 btn_manage'><span class='svg-icon-success svg-icon  svg-icon-1 svg_teh009'><span class='svg-icon-primary svg-icon  svg-icon-1'> <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path opacity='0.3' fill-rule='evenodd' clip-rule='evenodd' d='M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z' fill='currentColor'></path><path d='M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z' fill='currentColor'></path><path d='M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z' fill='currentColor'></path></svg></span></span></a>"
+                        //         + "<a title='Cập nhật' onclick='deleteItem(" + row.id + ")' class='me-2 btn_manage'><span class='svg-icon-success svg-icon  svg-icon-1 svg_teh009'><span class='svg-icon-danger svg-icon  svg-icon-1'><svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z' fill='currentColor'></path><path opacity='0.5' d='M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z' fill='currentColor'></path><path opacity='0.5' d='M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z' fill='currentColor'></path></svg></span></a>"
+                        // }
+                            + " <a title='Xem chi tiết' onclick='editItem(" + row.id + ")' class='btn_manage'><i class='fas fa-eye'></i></a>"
+                    }
+                },
+
+            ],
+            columnDefs: [
+                { targets: "no-sort", orderable: false },
+                { targets: "no-search", searchable: false },
+                { orderable: false, targets: [-1, 0] },
+            ],
+            aLengthMenu: [
+                [10, 25, 50, 100],
+                [10, 25, 50, 100]
+            ],
+            drawCallback: function () {
+                $('#tableData tfoot').html("");
+                $("#tableData thead:nth-child(1) tr").clone(true).appendTo("#tableData tfoot");
+                $('#tableData tfoot tr').addClass("border-top");
+            }
+        });
+    }
+        // Thay thế hàm editItem hiện tại bằng đoạn mã này
+    async function editItem(id) {
+        updatingItemId = id;
+        tableInvoiceDetail = $("#tableInvoiceDetail");
+
+        // Hiển thị modal
+        $("#modal-id").modal("show");
+
+        // Nếu có `id`, gọi API để lấy dữ liệu chi tiết
+        if (id > 0) {
+            const editObj = await getItemById(id); // Hàm này trả về dữ liệu API
+            if (!editObj) {
+                console.error("Không tìm thấy dữ liệu.");
+                return;
+            }
+
+            // Lưu dữ liệu hóa đơn vào biến toàn cục để sử dụng khi cập nhật
+            window.currentInvoice = editObj;
+
+            // Điền dữ liệu vào modal
+            $("#invoice-id").val(editObj.id || "0");
+            $("#invoice-invoiceCode").val(editObj.invoiceCode || "");
+            $("#invoice-totalMoney").text(formatCurrencyIV(editObj.totalMoney) || "0 VND");
+            $("#invoice-accoutId").val(editObj.cashierName || "");
+            $("#invoice-paymentStatus").val(editObj.paymentStatus || "");
+            $("#invoice-createdTime").val(
+                moment(editObj.createdTime).format("DD/MM/YYYY HH:mm:ss")
+            );
+
+            // Thiết lập phương thức thanh toán
+            if (editObj.paymentMethodId) {
+                $("#invoice-paymentMethod").val(editObj.paymentMethodId);
+            }
+
+            // Xử lý hiển thị QR code nếu phương thức thanh toán là chuyển khoản
+            handlePaymentMethodChange();
+
+            // Cập nhật danh sách món ăn
+            let detailHtml = "";
+            editObj.invoiceDetails.forEach((item) => {
+                detailHtml += `
+                <tr>
+                  <td>${item.dishName}</td>
+                  <td>${item.quantity}</td>
+                  <td>${formatCurrencyIV(item.unitPrice)}</td>
+                  <td>${formatCurrencyIV(item.quantity * item.unitPrice)}</td>
+                </tr>`;
+            });
+            $("#tableInvoiceDetail tbody").html(detailHtml);
+
+            // Hiển thị/ẩn các nút hành động dựa vào trạng thái thanh toán
+            if (editObj.paymentStatus === "Chờ thanh toán") {
+                $("#btnConfirmPayment").show();
+                $("#btnCancelInvoice").show();
+                $("#paymentMethodSection").show();
+            } else {
+                $("#btnConfirmPayment").hide();
+                $("#btnCancelInvoice").hide();
+                $("#paymentMethodSection").hide();
+            }
+
+            // Thiết lập sự kiện cho các nút
+            setupButtonEvents();
+        }
+    }
+
+    // Thêm các hàm mới
+    function formatCurrencyIV(amount) {
+        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+    }
+
+    function handlePaymentMethodChange() {
+        const paymentMethod = $("#invoice-paymentMethod").val();
+
+        if (paymentMethod === "Chuyển khoản" && $("#invoice-paymentStatus").val() === "Chờ thanh toán") {
+            // Nếu là chuyển khoản và chưa thanh toán, hiển thị QR code
+            const invoiceCode = $("#invoice-invoiceCode").val();
+            const totalMoney = window.currentInvoice.totalMoney;
+            const qrImageUrl = `https://img.vietqr.io/image/VCB-1031388895-compact.png?amount=${totalMoney}&addInfo=THANHTOAN${invoiceCode}`;
+            $("#qrCodeImage").attr("src", qrImageUrl);
+            $("#qrCodeSection").show();
+        } else {
+            // Nếu không, ẩn QR code
+            $("#qrCodeSection").hide();
+        }
+    }
+
+    function setupButtonEvents() {
+        // Sự kiện khi thay đổi phương thức thanh toán
+        $("#invoice-paymentMethod").off("change").on("change", handlePaymentMethodChange);
+
+        // Nút xác nhận thanh toán
+        $("#btnConfirmPayment").off("click").on("click", function() {
+            confirmPayment();
+        });
+
+        // Nút hủy hóa đơn
+        $("#btnCancelInvoice").off("click").on("click", function() {
+            cancelInvoice();
+        });
+
+        
+    }
+
+    function confirmPayment() {
+        Swal.fire({
+            title: 'Xác nhận thanh toán?',
+            text: "Bạn có chắc chắn muốn xác nhận thanh toán hóa đơn này?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Xác nhận',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Cập nhật dữ liệu hóa đơn
+                const updatedInvoice = { ...window.currentInvoice };
+                updatedInvoice.paymentStatus = "Đã thanh toán";
+                updatedInvoice.paymentMethod = $("#invoice-paymentMethod").val();
+
+                // Gọi API cập nhật
+                $.ajax({
+                    url: systemURL + "invoice/api/UpdateStatus",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(updatedInvoice),
+                    success: function(response) {
+                        if (response.status == 200 && response.message === "SUCCESS") {
+                            Swal.fire(
+                                'Thành công!',
+                                'Hóa đơn đã được xác nhận thanh toán.',
+                                'success'
+                            );
+                            $("#modal-id").modal("hide");
+                            reGenTable();
+                        } else {
+                            Swal.fire(
+                                'Lỗi!',
+                                'Có lỗi xảy ra khi xác nhận thanh toán.',
+                                'error'
+                            );
+                        }
+                    },
+                    error: function(error) {
+                        Swal.fire(
+                            'Lỗi!',
+                            'Có lỗi xảy ra khi xác nhận thanh toán.',
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
+    }
+
+    function cancelInvoice() {
+        Swal.fire({
+            title: 'Xác nhận hủy hóa đơn?',
+            text: "Bạn có chắc chắn muốn hủy hóa đơn này?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Hủy hóa đơn',
+            cancelButtonText: 'Không'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Cập nhật dữ liệu hóa đơn
+                const updatedInvoice = { ...window.currentInvoice };
+                updatedInvoice.paymentStatus = "Đã hủy";
+
+                // Gọi API cập nhật
+                $.ajax({
+                    url: systemURL + "invoice/api/UpdateStatus",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(updatedInvoice),
+                    success: function(response) {
+                        if (response.status == 200 && response.message === "SUCCESS") {
+                            Swal.fire(
+                                'Thành công!',
+                                'Hóa đơn đã được hủy.',
+                                'success'
+                            );
+                            $("#modal-id").modal("hide");
+                            reGenTable();
+                        } else {
+                            Swal.fire(
+                                'Lỗi!',
+                                'Có lỗi xảy ra khi hủy hóa đơn.',
+                                'error'
+                            );
+                        }
+                    },
+                    error: function(error) {
+                        Swal.fire(
+                            'Lỗi!',
+                            'Có lỗi xảy ra khi hủy hóa đơn.',
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
+    }
+
+    // Cập nhật hàm initTable để hiển thị trạng thái thanh toán đẹp hơn
+    function initTable() {
+        table = $('#tableData').DataTable({
+            processing: true,
+            serverSide: true,
+            paging: true,
+            searching: { regex: true },
+            order: [7, 'desc'],
+            "oLanguage": {
+                "sUrl": "/js/Vietnamese.json"
+            },
+            ajax: {
+                url: systemURL + "invoice/api/list-server-side",
+                type: "POST",
+                contentType: "application/json",
+                dataType: "json",
+                data: function (d) {
+                    d.searchAll = $("#search-input").val();
+                    return JSON.stringify(d);
+                }
+            },
+            columns: [
+                {
+                    data: 'id',
+                    render: function (data, type, row, meta) {
+                        var info = table.page.info();
+                        var stt = meta.row + 1 + info.page * info.length;
+                        return stt;
+                    }
+                },
+                {
+                    data: "invoiceCode",
+                    render: function (data, type, row, meta) {
+                        return `<span class="fw-bold text-primary">${data}</span>`;
+                    }
+                },
+                {
+                    data: "totalMoney",
+                    render: function (data, type, row, meta) {
+                        return formatCurrencyIV(data);
+                    }
+                },
+                {
+                    data: "paymentStatus",
+                    render: function (data, type, row, meta) {
+                        let badgeClass = "";
+                        let icon = "";
+
+                        if (data === "Đã thanh toán") {
+                            badgeClass = "badge-success";
+                            icon = '<i class="fas fa-check-circle me-1"></i>';
+                        } else if (data === "Chờ thanh toán") {
+                            badgeClass = "badge-warning";
+                            icon = '<i class="fas fa-clock me-1"></i>';
+                        } else if (data === "Đã hủy") {
+                            badgeClass = "badge-danger";
+                            icon = '<i class="fas fa-times-circle me-1"></i>';
+                        }
+
+                        return `<span class="badge ${badgeClass}">${icon}${data}</span>`;
+                    }
+                },
+                {
+                    data: "paymentMethod",
+                    render: function (data, type, row, meta) {
+                        let icon = data.includes("Tiền mặt") ?
+                            '<i class="fas fa-money-bill-wave me-1"></i>' :
+                            '<i class="fas fa-credit-card me-1"></i>';
+
+                        return `<span>${icon}${data}</span>`;
+                    }
+                },
+                {
+                    data: "accountId",
+                    render: function (data, type, row, meta) {
+                        return `<span><i class="fas fa-user me-1"></i>${data}</span>`;
+                    }
+                },
+                {
+                    data: "createdTime",
+                    render: function (data) {
+                        var displayValue = moment(data).format("DD/MM/YYYY HH:mm:ss");
+                        return `<span><i class="fas fa-calendar-alt me-1"></i>${displayValue}</span>`;
+                    }
+                },
+                {
+                    data: 'id',
+                    render: function (data, type, row, meta) {
+                        return `<div class="d-flex justify-content-center gap-2">
+                            <button title="Xem chi tiết" onclick="editItem(${row.id})" class="btn btn-sm btn-primary">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>`;
+                    }
+                },
+            ],
+            columnDefs: [
+                { targets: "no-sort", orderable: false },
+                { targets: "no-search", searchable: false },
+                { orderable: false, targets: [-1, 0] },
+            ],
+            aLengthMenu: [
+                [10, 25, 50, 100],
+                [10, 25, 50, 100]
+            ],
+            drawCallback: function () {
+                $('#tableData tfoot').html("");
+                $("#tableData thead:nth-child(1) tr").clone(true).appendTo("#tableData tfoot");
+                $('#tableData tfoot tr').addClass("border-top");
+            }
+        });
+    }
+
+    async function updateItem(id) {
+        var actionName = (id == 0 ? "Bạn muốn tạo mới" : "Cập nhật");
+        var obj;
+        if (id > 0) {
+            obj = await getItemById(id);
+        }
+        let objName = id > 0 ? obj.name : "item";
+        validateInputNumber();
+        var updatingObj = {
+            "id": $("#invoice-id").val(),
+            "invoiceCode": $("#invoice-invoiceCode").val(),
+            "totalMoney": $("#invoice-totalMoney").val(),
+            "paymentStatus": $("#invoice-paymentStatus").val(),
+            "active": $("#invoice-active").val() == '' ? 'true' : 'false',
+            "paymentMethod": $("#invoice-paymentMethodId").val(),
+            "accountId": $("#invoice-accountId").val(),
+            "createdTime": formatDatetimeUpdate($("#invoice-createdTime").val()),
+
+        };
+        Swal.fire({
+            title: 'Xác nhận thay đổi?',
+            text: "" + actionName + " " + objName + "",
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#443',
+            confirmButtonText: 'Xác nhận',
+            cancelButtonText: 'Huỷ'
+        }).then((result) => {
+            if (result.value) {
+                $("#modal-id").modal('hide');
+                //CALL AJAX TO UPDATE
+                if (id > 0) {
+                    $.ajax({
+                        url: systemURL + "invoice/api/update",
+                        type: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify(updatingObj),
+                        success: function (responseData) {
+                            // debugger;
+                            if (responseData.status == 200 && responseData.message === "SUCCESS") {
+                                Swal.fire(
+                                    'Thành Công!',
+                                    'Đã cập nhật "' + objName + '" ',
+                                    'success'
+                                );
+                                reGenTable();
+                                // Remove loading indication
+                                submitButton.removeAttribute('data-kt-indicator');
+                                // Enable button
+                                submitButton.disabled = false;
+                            }
+                        },
+                        error: function (e) {
+                            //console.log(e.message);
+                            Swal.fire(
+                                'Lỗi!',
+                                'Đã xảy ra lỗi, vui lòng thử lại',
+                                'error'
+                            );
+                            // Remove loading indication
+                            submitButton.removeAttribute('data-kt-indicator');
+                            // Enable button
+                            submitButton.disabled = false;
+                        }
+                    });
+                };
+                //CALL AJAX TO CREATE
+                if (id == 0) {
+                    updatingObj.id = 1;
+                    delete updatingObj["id"]
+                    updatingObj.active = true;
+                    updatingObj.createdTime = new Date();
+                    console.log(updatingObj);
+                    $.ajax({
+                        url: systemURL + "invoice/api/add",
+                        type: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify(updatingObj),
+                        success: function (responseData) {
+                            // debugger;
+                            if (responseData.status == 201 && responseData.message === "CREATED") {
+                                Swal.fire(
+                                    'Thành công!',
+                                    'Đã cập nhật dữ liệu',
+                                    'success'
+                                );
+                                updatingObj = responseData.data;
+                                reGenTable();
+                                // Remove loading indication
+                                submitButton.removeAttribute('data-kt-indicator');
+                                // Enable button
+                                submitButton.disabled = false;
+                            }
+                        },
+                        error: function (e) {
+                            //console.log(e.message);
+                            Swal.fire(
+                                'Lỗi!',
+                                'Đã xảy ra lỗi, vui lòng thử lại',
+                                'error'
+                            );
+                            // Remove loading indication
+                            submitButton.removeAttribute('data-kt-indicator');
+                            // Enable button
+                            submitButton.disabled = false;
+                        }
+                    });
+                }
+            }
+            else {
+                // Remove loading indication
+                submitButton.removeAttribute('data-kt-indicator');
+                // Enable button
+                submitButton.disabled = false;
+            }
+        })
+    }
+    async function deleteItem(id) {
+        updatingObj = table.ajax.json().data.find(c => c.id == id);
+        let objName = id > 0 ? updatingObj.invoiceCode : "item";
+        Swal.fire({
+            title: 'Xác nhận thay đổi?',
+            text: "Xóa " + objName + "",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Xoá',
+            cancelButtonText: 'Huỷ'
+        }).then((result) => {
+            if (result.value) {
+                //CALL AJAX TO DELETE
+                $.ajax({
+                    url: systemURL + "invoice/api/delete",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ "id": id }),
+                    success: function (responseData) {
+                        // debugger;
+                        if (responseData.status == 200 && responseData.message === "SUCCESS") {
+                            Swal.fire(
+                                'Thành công!',
+                                'Đã xoá ' + updatingObj.invoiceCode + '.',
+                                'success'
+                            );
+                            reGenTable();
+                        }
+                    },
+                    error: function (e) {
+                        //console.log(e.message);
+                        Swal.fire(
+                            'Lỗi!',
+                            'Đã xảy ra lỗi, vui lòng thử lại',
+                            'error'
+                        );
+                    }
+                });
+
+            }
+            else {
+                // Remove loading indication
+                submitButton.removeAttribute('data-kt-indicator');
+                // Enable button
+                submitButton.disabled = false;
+            }
+        })
+    }
+    async function getItemById(id) {
+        var data;
+        await $.ajax({
+            url: systemURL + "invoice/api/InvoiceDetailVM?invoiceId=" + id,
+            method: "GET",
+            success: function (responseData) {
+                data = responseData.data[0];
+            },
+            error: function (e) {
+            },
+        });
+        return data;
+    }
+    function reGenTable() {
+        tableUpdating = 0;
+        table.destroy();
+        $(".tableHeaderFilter").val(null).trigger("change");
+        $("#tableData tbody").html('');
+        loadData();
+    }
+    
+</script>
+<!--end:Base load data-->
+
+@* <script> *@
+@*         // Function in hóa đơn *@
+@*         // Function in hóa đơn - sử dụng Blob URL (thay thế hoàn toàn function cũ) *@
+@*         function printInvoice() { *@
+@*         if (!window.currentInvoice) { *@
+@*             Swal.fire('Lỗi', 'Không tìm thấy dữ liệu hóa đơn để in', 'error'); *@
+@*             return; *@
+@*         } *@
+
+@*         const invoice = window.currentInvoice; *@
+@*         const printContent = generatePrintContent(invoice); *@
+
+@*         const cssContent = ` *@
+@*             body { *@
+@*                 font-family: 'Times New Roman', serif; *@
+@*                 margin: 0; *@
+@*                 padding: 20px; *@
+@*                 line-height: 1.6; *@
+@*             } *@
+@*             .print-invoice { *@
+@*                 max-width: 800px; *@
+@*                 margin: 0 auto; *@
+@*             } *@
+@*             .print-header { *@
+@*                 text-align: center; *@
+@*                 border-bottom: 2px solid #000; *@
+@*                 padding-bottom: 20px; *@
+@*                 margin-bottom: 30px; *@
+@*             } *@
+@*             .print-title { *@
+@*                 font-size: 24px; *@
+@*                 font-weight: bold; *@
+@*                 margin: 10px 0; *@
+@*             } *@
+@*             .company-info { *@
+@*                 font-size: 14px; *@
+@*                 margin-bottom: 10px; *@
+@*             } *@
+@*             .print-info { *@
+@*                 display: flex; *@
+@*                 justify-content: space-between; *@
+@*                 margin-bottom: 30px; *@
+@*             } *@
+@*             .info-section { *@
+@*                 flex: 1; *@
+@*             } *@
+@*             .print-table { *@
+@*                 width: 100%; *@
+@*                 border-collapse: collapse; *@
+@*                 margin-bottom: 30px; *@
+@*             } *@
+@*             .print-table th, *@
+@*             .print-table td { *@
+@*                 border: 1px solid #000; *@
+@*                 padding: 8px; *@
+@*                 text-align: left; *@
+@*             } *@
+@*             .print-table th { *@
+@*                 background-color: #f0f0f0; *@
+@*                 font-weight: bold; *@
+@*                 text-align: center; *@
+@*             } *@
+@*             .text-right { text-align: right; } *@
+@*             .text-center { text-align: center; } *@
+@*             .total-row { *@
+@*                 font-weight: bold; *@
+@*                 background-color: #f9f9f9; *@
+@*             } *@
+@*             .print-footer { *@
+@*                 margin-top: 50px; *@
+@*                 display: flex; *@
+@*                 justify-content: space-between; *@
+@*             } *@
+@*             .signature-box { *@
+@*                 text-align: center; *@
+@*                 width: 200px; *@
+@*             } *@
+@*             .signature-line { *@
+@*                 border-top: 1px solid #000; *@
+@*                 margin-top: 60px; *@
+@*                 padding-top: 5px; *@
+@*             } *@
+@*     @@media print { *@
+@*                 body { margin: 0; } *@
+@*                 .no-print { display: none; } *@
+@*             } *@
+@*         `; *@
+
+@*         const htmlContent = ` *@
+@*     <!DOCTYPE html> *@
+@*     <html> *@
+@*     <head> *@
+@*         <meta charset="UTF-8"> *@
+@*         <title>Hóa đơn - ${invoice.invoiceCode}</title> *@
+@*         <style>${cssContent}</style> *@
+@*     </head> *@
+@*     <body> *@
+@*         ${printContent} *@
+@*         <div class="no-print" style="text-align: center; margin-top: 20px;"> *@
+@*             <button onclick="window.print()" style="padding: 10px 20px; font-size: 16px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">In hóa đơn</button> *@
+@*             <button onclick="window.close()" style="padding: 10px 20px; font-size: 16px; background: #6c757d; color: white; border: none; border-radius: 5px; cursor: pointer; margin-left: 10px;">Đóng</button> *@
+@*         </div> *@
+@*     </body> *@
+@*     </html> *@
+@*     `; *@
+
+@*         const encodedHtml = btoa(unescape(encodeURIComponent(htmlContent))); *@
+@*         const printWindow = window.open(`data:text/html;base64,${encodedHtml}`, '_blank'); *@
+
+@*         // Tự động in khi load xong *@
+@*         if (printWindow) { *@
+@*             printWindow.onload = function () { *@
+@*                 setTimeout(() => { *@
+@*                     printWindow.print(); *@
+@*                 }, 500); *@
+@*             }; *@
+@*         } *@
+@*     } *@
+
+@*     // Function tạo nội dung HTML cho in *@
+@*     function generatePrintContent(invoice) { *@
+@*         // Tạo bảng chi tiết món ăn *@
+@*         let itemsHtml = ''; *@
+@*         let totalAmount = 0; *@
+
+@*         invoice.invoiceDetails.forEach((item, index) => { *@
+@*             const itemTotal = item.quantity * item.unitPrice; *@
+@*             totalAmount += itemTotal; *@
+
+@*             itemsHtml += ` *@
+@*                 <tr> *@
+@*                     <td class="text-center">${index + 1}</td> *@
+@*                     <td>${item.dishName}</td> *@
+@*                     <td class="text-center">${item.quantity}</td> *@
+@*                     <td class="text-right">${formatCurrencyForPrint(item.unitPrice)}</td> *@
+@*                     <td class="text-right">${formatCurrencyForPrint(itemTotal)}</td> *@
+@*                 </tr> *@
+@*             `; *@
+@*         }); *@
+
+@*         return ` *@
+@*             <div class="print-invoice"> *@
+@*                 <div class="print-header"> *@
+@*                     <div class="company-info"> *@
+@*                         <strong>QUÁN CAFE ABC</strong><br> *@
+@*                         Địa chỉ: 123 Đường ABC, Quận XYZ, TP.HCM<br> *@
+@*                         Điện thoại: 0123.456.789 | Email: info@cafe-abc.com *@
+@*                     </div> *@
+@*                     <div class="print-title">HÓA ĐƠN THANH TOÁN</div> *@
+@*                     <div>Mã hóa đơn: <strong>${invoice.invoiceCode}</strong></div> *@
+@*                 </div> *@
+
+@*                 <div class="print-info"> *@
+@*                     <div class="info-section"> *@
+@*                         <strong>Thông tin hóa đơn:</strong><br> *@
+@*                         Ngày tạo: ${moment(invoice.createdTime).format('DD/MM/YYYY HH:mm:ss')}<br> *@
+@*                         Thu ngân: ${invoice.cashierName || 'N/A'}<br> *@
+@*                         Trạng thái: ${invoice.paymentStatus} *@
+@*                     </div> *@
+@*                     <div class="info-section"> *@
+@*                         <strong>Thông tin thanh toán:</strong><br> *@
+@*                         Phương thức: ${invoice.paymentMethod || 'Chưa xác định'}<br> *@
+@*                         Tổng tiền: <strong>${formatCurrencyForPrint(invoice.totalMoney)}</strong> *@
+@*                     </div> *@
+@*                 </div> *@
+
+@*                 <table class="print-table"> *@
+@*                     <thead> *@
+@*                         <tr> *@
+@*                             <th style="width: 50px;">STT</th> *@
+@*                             <th>Tên món</th> *@
+@*                             <th style="width: 80px;">SL</th> *@
+@*                             <th style="width: 120px;">Đơn giá</th> *@
+@*                             <th style="width: 120px;">Thành tiền</th> *@
+@*                         </tr> *@
+@*                     </thead> *@
+@*                     <tbody> *@
+@*                         ${itemsHtml} *@
+@*                         <tr class="total-row"> *@
+@*                             <td colspan="4" class="text-right"><strong>TỔNG CỘNG:</strong></td> *@
+@*                             <td class="text-right"><strong>${formatCurrencyForPrint(invoice.totalMoney)}</strong></td> *@
+@*                         </tr> *@
+@*                     </tbody> *@
+@*                 </table> *@
+
+@*                 <div style="margin-bottom: 30px;"> *@
+@*                     <strong>Số tiền bằng chữ:</strong> ${numberToWords(invoice.totalMoney)} đồng *@
+@*                 </div> *@
+
+@*                 <div class="print-footer"> *@
+@*                     <div class="signature-box"> *@
+@*                         <strong>Khách hàng</strong> *@
+@*                         <div class="signature-line">Ký, ghi rõ họ tên</div> *@
+@*                     </div> *@
+@*                     <div class="signature-box"> *@
+@*                         <strong>Thu ngân</strong> *@
+@*                         <div class="signature-line">${invoice.cashierName || ''}</div> *@
+@*                     </div> *@
+@*                 </div> *@
+
+@*                 <div style="text-align: center; margin-top: 30px; font-style: italic;"> *@
+@*                     Cảm ơn quý khách và hẹn gặp lại! *@
+@*                 </div> *@
+@*             </div> *@
+@*         `; *@
+@*     } *@
+
+@*     // Function format tiền tệ cho in *@
+@*     function formatCurrencyForPrint(amount) { *@
+@*         return new Intl.NumberFormat('vi-VN').format(amount) + ' ₫'; *@
+@*     } *@
+
+@*     // Function chuyển số thành chữ (đơn giản) *@
+@*     function numberToWords(num) { *@
+@*         if (num === 0) return "Không"; *@
+
+@*         const ones = ["", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín"]; *@
+@*         const tens = ["", "", "hai mươi", "ba mươi", "bốn mươi", "năm mươi", "sáu mươi", "bảy mươi", "tám mươi", "chín mươi"]; *@
+@*         const scales = ["", "nghìn", "triệu", "tỷ"]; *@
+
+@*         // Đây là implementation đơn giản, bạn có thể sử dụng thư viện chuyên dụng *@
+@*         if (num < 1000) { *@
+@*             return num.toString(); *@
+@*         } else if (num < 1000000) { *@
+@*             return Math.floor(num / 1000) + " nghìn " + (num % 1000 > 0 ? (num % 1000) : ""); *@
+@*         } else if (num < 1000000000) { *@
+@*             return Math.floor(num / 1000000) + " triệu " + (num % 1000000 > 0 ? Math.floor((num % 1000000) / 1000) + " nghìn" : ""); *@
+@*         } *@
+
+@*         return num.toLocaleString('vi-VN'); *@
+@*     } *@
+@* </script> *@
+
+<!--begin:setting in data table-->
+<script>
+    function tableSearch() {
+        table.column(1).search($('#tableData thead:nth-child(2) tr th:nth-child(2) input').val());
+        table.column(2).search($('#tableData thead:nth-child(2) tr th:nth-child(3) input').val());
+        table.column(3).search($('#tableData thead:nth-child(2) tr th:nth-child(4) input').val());
+        table.column(4).search($('#tableData thead:nth-child(2) tr th:nth-child(5) input').val());
+        table.column(5).search($('#tableData thead:nth-child(2) tr th:nth-child(6) input').val());
+        table.column(6).search($('#tableData thead:nth-child(2) tr th:nth-child(7) input').val());
+        table.column(7).search($('#tableData thead:nth-child(2) tr th:nth-child(8) input').val());
+        table.draw();
+    }
+</script>
+<!--end:setting in data table-->

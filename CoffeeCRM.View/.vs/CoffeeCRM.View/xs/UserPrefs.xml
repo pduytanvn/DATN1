@@ -1,0 +1,19 @@
+﻿<Properties StartupConfiguration="{4FD8BF8D-5B34-4F99-ACFB-B1D8C2ED150D}|Default">
+  <MonoDevelop.Ide.ItemProperties.CoffeeCRM.View PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="CoffeeCRM.View" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <AuthorInfo Name="tanduy" Email="" Copyright="" Company="" Trademark="" />
+</Properties>

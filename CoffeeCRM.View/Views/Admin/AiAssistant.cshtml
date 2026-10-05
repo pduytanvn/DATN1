@@ -1,0 +1,1732 @@
+﻿@{
+    ViewData["Title"] = "Trợ lý AI CoffeeCRM";
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+}
+
+<style>
+    .ai-page {
+        padding: 10px 0 30px 0;
+    }
+
+    .ai-header {
+        margin-bottom: 24px;
+    }
+
+        .ai-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #181c32;
+        }
+
+        .ai-header p {
+            color: #7e8299;
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
+    .ai-container {
+        background: #ffffff;
+        border-radius: 14px;
+        border: 1px solid #e9ecef;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .ai-topbar {
+        padding: 18px 22px;
+        border-bottom: 1px solid #eef0f3;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .ai-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .ai-avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: #f1f5ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 23px;
+        color: #3e7bfa;
+    }
+
+    .ai-name {
+        font-weight: 700;
+        font-size: 16px;
+        color: #181c32;
+    }
+
+    .ai-status {
+        font-size: 12px;
+        color: #50cd89;
+        margin-top: 2px;
+    }
+
+        .ai-status::before {
+            content: "";
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #50cd89;
+            margin-right: 5px;
+        }
+
+    .ai-badge {
+        padding: 7px 12px;
+        background: #eef6ff;
+        color: #3e7bfa;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .suggestion-area {
+        padding: 18px 22px 10px 22px;
+    }
+
+    .suggestion-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: #7e8299;
+        margin-bottom: 10px;
+    }
+
+    .suggestion-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .suggestion-btn {
+        border: 1px solid #e4e6ef;
+        background: #ffffff;
+        color: #3f4254;
+        padding: 8px 13px;
+        border-radius: 20px;
+        font-size: 13px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+        .suggestion-btn:hover {
+            background: #f5f8fa;
+            border-color: #3e7bfa;
+            color: #3e7bfa;
+        }
+
+    .chat-area {
+        height: 470px;
+        overflow-y: auto;
+        padding: 22px;
+        background: #fafafa;
+        border-top: 1px solid #f1f1f1;
+        border-bottom: 1px solid #eef0f3;
+    }
+
+    .message {
+        display: flex;
+        margin-bottom: 16px;
+    }
+
+    .message-content {
+        max-width: 75%;
+        padding: 12px 15px;
+        border-radius: 12px;
+        font-size: 14px;
+        line-height: 1.6;
+        word-break: break-word;
+    }
+
+    .ai-message {
+        justify-content: flex-start;
+    }
+
+        .ai-message .message-content {
+            background: #ffffff;
+            color: #3f4254;
+            border: 1px solid #e9ecef;
+            border-top-left-radius: 4px;
+        }
+
+    .user-message {
+        justify-content: flex-end;
+    }
+
+        .user-message .message-content {
+            background: #3e7bfa;
+            color: #ffffff;
+            border-top-right-radius: 4px;
+        }
+
+    .chat-input-area {
+        padding: 16px 18px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #ffffff;
+    }
+
+    #userInput {
+        flex: 1;
+        height: 44px;
+        border: 1px solid #e4e6ef;
+        border-radius: 10px;
+        padding: 0 14px;
+        outline: none;
+        font-size: 14px;
+    }
+
+        #userInput:focus {
+            border-color: #3e7bfa;
+        }
+
+    #sendButton {
+        height: 44px;
+        border: none;
+        border-radius: 10px;
+        padding: 0 20px;
+        background: #3e7bfa;
+        color: #ffffff;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+        #sendButton:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+    .typing {
+        display: inline-flex;
+        gap: 4px;
+        align-items: center;
+    }
+
+        .typing span {
+            width: 6px;
+            height: 6px;
+            background: #a1a5b7;
+            border-radius: 50%;
+            display: inline-block;
+            animation: typingAnimation 1.2s infinite;
+        }
+
+            .typing span:nth-child(2) {
+                animation-delay: 0.2s;
+            }
+
+            .typing span:nth-child(3) {
+                animation-delay: 0.4s;
+            }
+
+    @@keyframes typingAnimation {
+        0%, 60%, 100% {
+            transform: translateY(0);
+        }
+
+        30% {
+            transform: translateY(-4px);
+        }
+    }
+
+    .data-card {
+        margin-top: 12px;
+        padding: 12px;
+        border-radius: 10px;
+        background: #f8f9fa;
+        min-width: 420px;
+    }
+
+    .data-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        padding: 8px 0;
+        border-bottom: 1px dashed #e4e6ef;
+    }
+
+        .data-row:last-child {
+            border-bottom: none;
+        }
+
+    .data-value {
+        font-weight: 700;
+        color: #181c32;
+        text-align: right;
+    }
+
+        .data-value small {
+            font-weight: 400;
+            color: #7e8299;
+        }
+
+    .ai-note {
+        margin-top: 12px;
+        padding: 10px 12px;
+        background: #fff8dd;
+        border-radius: 8px;
+        color: #7a6500;
+    }
+
+    @@media (max-width: 768px) {
+        .chat-area {
+            height: 420px;
+        }
+
+        .message-content {
+            max-width: 90%;
+        }
+
+        .data-card {
+            min-width: auto;
+        }
+
+        .ai-badge {
+            display: none;
+        }
+    }
+</style>
+
+<div class="ai-page">
+
+    <div class="ai-header">
+        <h1>
+            <i class="bi bi-robot"></i>
+            Trợ lý AI CoffeeCRM
+        </h1>
+
+        <p>
+            Trợ lý hỗ trợ phân tích dữ liệu và hoạt động kinh doanh của cửa hàng.
+        </p>
+    </div>
+
+    <div class="ai-container">
+
+        <div class="ai-topbar">
+
+            <div class="ai-info">
+
+                <div class="ai-avatar">
+                    <i class="bi bi-robot"></i>
+                </div>
+
+                <div>
+                    <div class="ai-name">
+                        CoffeeCRM Assistant
+                    </div>
+
+                    <div class="ai-status">
+                        Đang hoạt động
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="ai-badge">
+                AI Business Assistant
+            </div>
+
+        </div>
+
+        <div class="suggestion-area">
+
+            <div class="suggestion-title">
+                Gợi ý câu hỏi
+            </div>
+
+            <div class="suggestion-list">
+
+                <button type="button"
+                        class="suggestion-btn"
+                        data-question="Doanh thu hôm nay">
+
+                    <i class="bi bi-cash-stack"></i>
+                    Doanh thu hôm nay
+
+                </button>
+
+                <button type="button"
+                        class="suggestion-btn"
+                        data-question="Món bán chạy">
+
+                    <i class="bi bi-cup-hot"></i>
+                    Món bán chạy
+
+                </button>
+
+                <button type="button"
+                        class="suggestion-btn"
+                        data-question="Kiểm tra tồn kho">
+
+                    <i class="bi bi-box-seam"></i>
+                    Kiểm tra tồn kho
+
+                </button>
+
+                <button type="button"
+                        class="suggestion-btn"
+                        data-question="Phân tích kinh doanh">
+
+                    <i class="bi bi-graph-up-arrow"></i>
+                    Phân tích kinh doanh
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="chat-area"
+             id="chatMessages">
+
+            <div class="message ai-message">
+
+                <div class="message-content">
+
+                    Xin chào! Tôi là
+                    <strong>Trợ lý AI CoffeeCRM</strong>.
+
+                    <br><br>
+
+                    Tôi có thể hỗ trợ bạn phân tích dữ liệu
+                    kinh doanh của cửa hàng.
+
+                    <br><br>
+
+                    Hiện tại tôi đã được kết nối với dữ liệu
+                    <strong>doanh thu</strong> và
+                    <strong>món bán chạy</strong>
+                    của CoffeeCRM.
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="chat-input-area">
+
+            <input type="text"
+                   id="userInput"
+                   placeholder="Nhập câu hỏi cho trợ lý AI..."
+                   autocomplete="off" />
+
+            <button type="button"
+                    id="sendButton">
+
+                <i class="bi bi-send-fill"></i>
+                Gửi
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>const API_URL = "http://localhost:7273";
+
+    const chatMessages =
+        document.getElementById("chatMessages");
+
+    const userInput =
+        document.getElementById("userInput");
+
+    const sendButton =
+        document.getElementById("sendButton");
+
+
+    // ==============================
+    // MESSAGE
+    // ==============================
+
+    function addMessage(message, type) {
+
+        const messageDiv =
+            document.createElement("div");
+
+        messageDiv.classList.add(
+            "message",
+            type
+        );
+
+        messageDiv.innerHTML = `
+            <div class="message-content">
+                ${message}
+            </div>
+        `;
+
+        chatMessages.appendChild(
+            messageDiv
+        );
+
+        chatMessages.scrollTop =
+            chatMessages.scrollHeight;
+
+        return messageDiv;
+    }
+
+
+    function addLoadingMessage() {
+
+        return addMessage(
+            `
+            <div class="typing">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            `,
+            "ai-message"
+        );
+    }
+
+
+    function formatMoney(value) {
+
+        return Number(value || 0)
+            .toLocaleString("vi-VN") + " VNĐ";
+    }
+
+
+    // ==============================
+    // DOANH THU HOM NAY
+    // ==============================
+
+    async function getTodayRevenue() {
+
+        const loadingMessage =
+            addLoadingMessage();
+
+        sendButton.disabled = true;
+
+        try {
+
+            const response = await fetch(
+                `${API_URL}/Invoice/api/ai/today-summary`
+            );
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "HTTP " + response.status
+                );
+            }
+
+            const result =
+                await response.json();
+
+            console.log(
+                "AI TODAY SUMMARY:",
+                result
+            );
+
+            // CoffeeManagementResponse trả data dạng mảng
+            const data =
+                Array.isArray(result.data)
+                    ? result.data[0]
+                    : result.data;
+
+            if (!data) {const dishes =
+    Array.isArray(result.data?.[0])
+        ? result.data[0]
+        : result.data;
+
+                throw new Error(
+                    "Không có dữ liệu doanh thu."
+                );
+            }
+
+            loadingMessage.remove();
+
+            let analysis = "";
+
+            if (
+                Number(data.totalInvoices) === 0
+            ) {
+
+                analysis = `
+                    <div class="ai-note">
+                        <strong>Nhận xét:</strong>
+                        Hiện hôm nay chưa ghi nhận
+                        hóa đơn hoặc doanh thu.
+                    </div>
+                `;
+
+            } else {
+
+                analysis = `
+                    <div class="ai-note">
+                        <strong>Nhận xét:</strong>
+
+                        Hôm nay hệ thống đã ghi nhận
+
+                        <strong>
+                            ${data.totalInvoices} hóa đơn
+                        </strong>
+
+                        với tổng doanh thu
+
+                        <strong>
+                            ${formatMoney(data.totalRevenue)}
+                        </strong>.
+                    </div>
+                `;
+            }
+
+            const answer = `
+
+                <strong>
+                    📊 Tình hình kinh doanh hôm nay
+                    - ${data.date}
+                </strong>
+
+                <div class="data-card">
+
+                    <div class="data-row">
+
+                        <span>
+                            Doanh thu
+                        </span>
+
+                        <span class="data-value">
+                            ${formatMoney(
+                data.totalRevenue
+            )}
+                        </span>
+
+                    </div>
+
+                    <div class="data-row">
+
+                        <span>
+                            Số hóa đơn
+                        </span>
+
+                        <span class="data-value">
+                            ${data.totalInvoices}
+                        </span>
+
+                    </div>
+
+                    <div class="data-row">
+
+                        <span>
+                            Trung bình mỗi hóa đơn
+                        </span>
+
+                        <span class="data-value">
+                            ${formatMoney(
+                data.averageInvoice
+            )}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                ${analysis}
+            `;
+
+            addMessage(
+                answer,
+                "ai-message"
+            );
+
+        }
+        catch (error) {
+
+            console.error(
+                "LỖI TODAY SUMMARY:",
+                error
+            );
+
+            if (loadingMessage) {
+                loadingMessage.remove();
+            }
+
+            addMessage(
+                `
+                <strong>
+                    Không thể lấy dữ liệu doanh thu.
+                </strong>
+
+                <br><br>
+
+                Hãy kiểm tra CoffeeCRM.Api
+                có đang chạy tại
+                <strong>localhost:7273</strong>.
+                `,
+                "ai-message"
+            );
+
+        }
+        finally {
+
+            sendButton.disabled = false;
+
+            userInput.focus();
+        }
+    }
+
+
+    // ==============================
+    // MON BAN CHAY
+    // ==============================
+
+    async function getTopSellingDishes() {
+
+        const loadingMessage =
+            addLoadingMessage();
+
+        sendButton.disabled = true;
+
+        try {
+
+            const response = await fetch(
+                `${API_URL}/Invoice/api/ai/top-dishes`
+            );
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "HTTP " + response.status
+                );
+            }
+
+            const result =
+                await response.json();
+
+            console.log(
+                "AI TOP DISHES:",
+                result
+            );
+
+            const dishes =
+                Array.isArray(result.data?.[0])
+                    ? result.data[0]
+                    : result.data;
+
+            if (
+                !dishes ||
+                !Array.isArray(dishes) ||
+                dishes.length === 0
+            ) {
+
+                loadingMessage.remove();
+
+                addMessage(
+                    `
+                    <strong>
+                        🔥 Món bán chạy
+                    </strong>
+
+                    <br><br>
+
+                    Hiện chưa có dữ liệu bán hàng
+                    để thống kê.
+                    `,
+                    "ai-message"
+                );
+
+                return;
+            }
+
+            loadingMessage.remove();
+
+            let dishHtml = "";
+
+            dishes.forEach(
+                (dish, index) => {
+
+                    let medal;
+
+                    if (index === 0) {
+
+                        medal = "🥇";
+
+                    } else if (index === 1) {
+
+                        medal = "🥈";
+
+                    } else if (index === 2) {
+
+                        medal = "🥉";
+
+                    } else {
+
+                        medal =
+                            `${index + 1}.`;
+                    }
+
+                    dishHtml += `
+
+                        <div class="data-row">
+
+                            <span>
+
+                                ${medal}
+
+                                <strong>
+                                    ${dish.dishName}
+                                </strong>
+
+                            </span>
+
+                            <span class="data-value">
+
+                                ${dish.totalQuantity} món
+
+                                <br>
+
+                                <small>
+                                    ${formatMoney(
+                        dish.totalRevenue
+                    )}
+                                </small>
+
+                            </span>
+
+                        </div>
+                    `;
+                }
+            );
+
+
+            const topDish =
+                dishes[0];
+
+
+            const answer = `
+
+                <strong>
+                    🔥 Top món bán chạy
+                </strong>
+
+                <div class="data-card">
+
+                    ${dishHtml}
+
+                </div>
+
+                <div class="ai-note">
+
+                    <strong>
+                        Nhận xét:
+                    </strong>
+
+                    Món đang bán chạy nhất là
+
+                    <strong>
+                        ${topDish.dishName}
+                    </strong>
+
+                    với
+
+                    <strong>
+                        ${topDish.totalQuantity} món
+                    </strong>
+
+                    đã bán, mang lại
+
+                    <strong>
+                        ${formatMoney(
+                topDish.totalRevenue
+            )}
+                    </strong>
+
+                    doanh thu.
+
+                </div>
+            `;
+
+
+            addMessage(
+                answer,
+                "ai-message"
+            );
+
+        }
+        catch (error) {
+
+            console.error(
+                "LỖI TOP DISHES:",
+                error
+            );
+
+            if (loadingMessage) {
+
+                loadingMessage.remove();
+            }
+
+            addMessage(
+                `
+                <strong>
+                    Không thể lấy dữ liệu món bán chạy.
+                </strong>
+
+                <br><br>
+
+                Hãy kiểm tra CoffeeCRM.Api
+                có đang chạy tại
+                <strong>localhost:7273</strong>.
+                `,
+                "ai-message"
+            );
+
+        }
+        finally {
+
+            sendButton.disabled = false;
+
+            userInput.focus();
+        }
+    }
+
+    // ==============================
+    // KIEM TRA TON KHO
+    // ==============================
+
+    async function getInventorySummary() {
+
+        const loadingMessage = addLoadingMessage();
+        sendButton.disabled = true;
+
+        try {
+
+            const response = await fetch(
+                `${API_URL}/Invoice/api/ai/inventory`
+            );
+
+            if (!response.ok) {
+                throw new Error(
+                    "HTTP " + response.status
+                );
+            }
+
+            const result = await response.json();
+
+            console.log(
+                "AI INVENTORY:",
+                result
+            );
+
+            let data = result.data;
+
+            // Response của project có thể bọc object trong array
+            if (Array.isArray(data)) {
+                data = data[0];
+            }
+
+            if (!data) {
+                throw new Error(
+                    "Không có dữ liệu tồn kho."
+                );
+            }
+
+            loadingMessage.remove();
+
+            const items =
+                Array.isArray(data.items)
+                    ? data.items
+                    : [];
+
+
+            let warningItems = items.filter(
+                item =>
+                    item.status !== "NORMAL" ||
+                    item.expiringSoon ||
+                    item.expired
+            );
+
+
+            let itemHtml = "";
+
+
+            if (warningItems.length === 0) {
+
+                itemHtml = `
+                <div class="data-row">
+
+                    <span>
+                        ✅ Không có cảnh báo
+                    </span>
+
+                    <span class="data-value">
+                        Kho ổn định
+                    </span>
+
+                </div>
+            `;
+
+            } else {
+
+                warningItems.forEach(item => {
+
+                    let icon = "📦";
+                    let statusText = "Bình thường";
+
+                    if (
+                        item.status ===
+                        "OUT_OF_STOCK"
+                    ) {
+                        icon = "❌";
+                        statusText = "Hết hàng";
+                    }
+                    else if (
+                        item.status ===
+                        "LOW_STOCK"
+                    ) {
+                        icon = "⚠️";
+                        statusText = "Sắp hết";
+                    }
+
+                    if (item.expired) {
+                        icon = "🚨";
+                        statusText += " - Có lô hết hạn";
+                    }
+                    else if (item.expiringSoon) {
+                        icon = "⏰";
+                        statusText += " - Sắp hết hạn";
+                    }
+
+
+                    itemHtml += `
+
+                    <div class="data-row">
+
+                        <span>
+
+                            ${icon}
+
+                            <strong>
+                                ${item.ingredientName}
+                            </strong>
+
+                            <br>
+
+                            <small>
+                                ${statusText}
+                            </small>
+
+                        </span>
+
+                        <span class="data-value">
+
+                            ${item.totalQuantity}
+
+                        </span>
+
+                    </div>
+                `;
+                });
+            }
+
+
+            const answer = `
+
+            <strong>
+                📦 Kiểm tra tồn kho
+            </strong>
+
+            <div class="data-card">
+
+                <div class="data-row">
+                    <span>Tổng nguyên liệu</span>
+                    <span class="data-value">
+                        ${data.totalIngredients}
+                    </span>
+                </div>
+
+                <div class="data-row">
+                    <span>Nguyên liệu sắp hết</span>
+                    <span class="data-value">
+                        ${data.lowStockCount}
+                    </span>
+                </div>
+
+                <div class="data-row">
+                    <span>Đã hết hàng</span>
+                    <span class="data-value">
+                        ${data.outOfStockCount}
+                    </span>
+                </div>
+
+                <div class="data-row">
+                    <span>Sắp hết hạn</span>
+                    <span class="data-value">
+                        ${data.expiringSoonCount}
+                    </span>
+                </div>
+
+                <div class="data-row">
+                    <span>Có lô hết hạn</span>
+                    <span class="data-value">
+                        ${data.expiredCount}
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="data-card">
+
+                <strong>
+                    Nguyên liệu cần chú ý
+                </strong>
+
+                ${itemHtml}
+
+            </div>
+        `;
+
+
+            addMessage(
+                answer,
+                "ai-message"
+            );
+
+        }
+        catch (error) {
+
+            console.error(
+                "LỖI INVENTORY:",
+                error
+            );
+
+            if (loadingMessage) {
+                loadingMessage.remove();
+            }
+
+            addMessage(
+                `
+            <strong>
+                Không thể lấy dữ liệu tồn kho.
+            </strong>
+            `,
+                "ai-message"
+            );
+
+        }
+        finally {
+
+            sendButton.disabled = false;
+            userInput.focus();
+        }
+    }
+
+
+    // ==============================
+    // PHAN TICH KINH DOANH
+    // ==============================
+
+    async function getBusinessAnalysis() {
+
+        const loadingMessage =
+            addLoadingMessage();
+
+        sendButton.disabled = true;
+
+        try {
+
+            const response = await fetch(
+                `${API_URL}/Invoice/api/ai/business-analysis`
+            );
+
+            if (!response.ok) {
+                throw new Error(
+                    "HTTP " + response.status
+                );
+            }
+
+            const result =
+                await response.json();
+
+
+            console.log(
+                "AI BUSINESS ANALYSIS:",
+                result
+            );
+
+
+            let data = result.data;
+
+            if (Array.isArray(data)) {
+                data = data[0];
+            }
+
+
+            if (!data) {
+
+                throw new Error(
+                    "Không có dữ liệu phân tích."
+                );
+            }
+
+
+            loadingMessage.remove();
+
+
+            const revenue =
+                data.revenue || {};
+
+            const inventory =
+                data.inventory || {};
+
+            const topDish =
+                data.topDish;
+
+
+            let topDishHtml = `
+            Chưa có dữ liệu
+        `;
+
+
+            if (topDish) {
+
+                topDishHtml = `
+                ${topDish.dishName}
+                (${topDish.totalQuantity} món)
+            `;
+            }
+
+
+            let recommendation = "";
+
+
+            if (
+                Number(
+                    inventory.outOfStockCount
+                ) > 0
+            ) {
+
+                recommendation += `
+                <br>
+                - Có nguyên liệu đã hết hàng,
+                cần kiểm tra kế hoạch nhập kho.
+            `;
+            }
+
+
+            if (
+                Number(
+                    inventory.lowStockCount
+                ) > 0
+            ) {
+
+                recommendation += `
+                <br>
+                - Có nguyên liệu tồn kho thấp,
+                nên chuẩn bị bổ sung.
+            `;
+            }
+
+
+            if (
+                Number(
+                    inventory.expiringSoonCount
+                ) > 0
+            ) {
+
+                recommendation += `
+                <br>
+                - Có nguyên liệu sắp hết hạn,
+                nên ưu tiên sử dụng và kiểm tra kho.
+            `;
+            }
+
+
+            if (
+                Number(
+                    inventory.expiredCount
+                ) > 0
+            ) {
+
+                recommendation += `
+                <br>
+                - Phát hiện lô nguyên liệu đã hết hạn,
+                cần kiểm tra trước khi sử dụng.
+            `;
+            }
+
+
+            if (
+                recommendation === ""
+            ) {
+
+                recommendation = `
+                <br>
+                - Chưa phát hiện cảnh báo tồn kho
+                đáng chú ý.
+            `;
+            }
+
+
+            const answer = `
+
+            <strong>
+                📈 Phân tích kinh doanh
+                - ${data.date}
+            </strong>
+
+
+            <div class="data-card">
+
+                <div class="data-row">
+
+                    <span>
+                        💰 Doanh thu hôm nay
+                    </span>
+
+                    <span class="data-value">
+                        ${formatMoney(
+                revenue.totalRevenue
+            )}
+                    </span>
+
+                </div>
+
+
+                <div class="data-row">
+
+                    <span>
+                        🧾 Số hóa đơn
+                    </span>
+
+                    <span class="data-value">
+                        ${revenue.totalInvoices || 0}
+                    </span>
+
+                </div>
+
+
+                <div class="data-row">
+
+                    <span>
+                        💳 Trung bình hóa đơn
+                    </span>
+
+                    <span class="data-value">
+                        ${formatMoney(
+                revenue.averageInvoice
+            )}
+                    </span>
+
+                </div>
+
+
+                <div class="data-row">
+
+                    <span>
+                        🔥 Món bán chạy
+                    </span>
+
+                    <span class="data-value">
+                        ${topDishHtml}
+                    </span>
+
+                </div>
+
+
+                <div class="data-row">
+
+                    <span>
+                        ⚠️ Nguyên liệu sắp hết
+                    </span>
+
+                    <span class="data-value">
+                        ${inventory.lowStockCount || 0}
+                    </span>
+
+                </div>
+
+
+                <div class="data-row">
+
+                    <span>
+                        ❌ Nguyên liệu hết hàng
+                    </span>
+
+                    <span class="data-value">
+                        ${inventory.outOfStockCount || 0}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="ai-note">
+
+                <strong>
+                    Phân tích tự động:
+                </strong>
+
+                <br>
+
+                Hôm nay cửa hàng ghi nhận
+
+                <strong>
+                    ${revenue.totalInvoices || 0}
+                    hóa đơn
+                </strong>
+
+                với doanh thu
+
+                <strong>
+                    ${formatMoney(
+                revenue.totalRevenue
+            )}
+                </strong>.
+
+
+                ${topDish
+                    ? `
+                        <br>
+                        Món có số lượng bán cao nhất
+                        hiện tại là
+                        <strong>
+                            ${topDish.dishName}
+                        </strong>.
+                    `
+                    : `
+                        <br>
+                        Chưa có đủ dữ liệu để
+                        xác định món bán chạy.
+                    `
+                }
+
+
+                <br><br>
+
+                <strong>
+                    Khuyến nghị:
+                </strong>
+
+                ${recommendation}
+
+            </div>
+        `;
+
+
+            addMessage(
+                answer,
+                "ai-message"
+            );
+
+        }
+        catch (error) {
+
+            console.error(
+                "LỖI BUSINESS ANALYSIS:",
+                error
+            );
+
+
+            if (loadingMessage) {
+                loadingMessage.remove();
+            }
+
+
+            addMessage(
+                `
+            <strong>
+                Không thể phân tích dữ liệu kinh doanh.
+            </strong>
+            `,
+                "ai-message"
+            );
+
+        }
+        finally {
+
+            sendButton.disabled = false;
+            userInput.focus();
+        }
+    }
+    // ==============================
+    // XU LY CAU HOI
+    // ==============================
+    async function askGemini(question) {
+
+        const loadingMessage = addLoadingMessage();
+
+        sendButton.disabled = true;
+        userInput.disabled = true;
+
+        try {
+
+            const response = await fetch(
+                `${API_URL}/Invoice/api/ai/chat`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        message: question
+                    })
+                }
+            );
+
+            let result;
+
+            try {
+                result = await response.json();
+            }
+            catch {
+                throw new Error(
+                    "Server trả về dữ liệu không hợp lệ."
+                );
+            }
+
+            console.log(
+                "COFFEECRM AI:",
+                result
+            );
+
+            if (!response.ok) {
+
+                throw new Error(
+                    result.message ||
+                    "Không thể kết nối tới AI."
+                );
+            }
+
+            if (!result.success || !result.answer) {
+
+                throw new Error(
+                    "AI không trả về câu trả lời."
+                );
+            }
+
+            loadingMessage.remove();
+
+            // Chuyển xuống dòng của Gemini thành HTML
+            let formattedAnswer = result.answer
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+                .replace(/\n/g, "<br>");
+
+
+            const answerHtml = `
+
+            <div>
+
+                <div style="
+                    display:flex;
+                    align-items:center;
+                    gap:8px;
+                    margin-bottom:10px;
+                ">
+
+                    <strong>
+                        🤖 CoffeeCRM AI
+                    </strong>
+
+                    ${result.model
+                    ? `
+                                <span style="
+                                    font-size:11px;
+                                    padding:3px 8px;
+                                    border-radius:20px;
+                                    background:#eef4ff;
+                                    color:#3975e9;
+                                ">
+                                    ${result.model}
+                                </span>
+                            `
+                    : ""
+                }
+
+                </div>
+
+                <div>
+                    ${formattedAnswer}
+                </div>
+
+            </div>
+        `;
+
+
+            addMessage(
+                answerHtml,
+                "ai-message"
+            );
+
+        }
+        catch (error) {
+
+            console.error(
+                "COFFEECRM AI ERROR:",
+                error
+            );
+
+            if (loadingMessage) {
+                loadingMessage.remove();
+            }
+
+
+            addMessage(
+                `
+                <strong>
+                    ⚠️ Trợ lý AI tạm thời không phản hồi.
+                </strong>
+
+                <br><br>
+
+                ${error.message}
+
+                <br><br>
+
+                Bạn vẫn có thể sử dụng
+                4 chức năng phân tích nhanh phía trên.
+            `,
+                "ai-message"
+            );
+
+        }
+        finally {
+
+            sendButton.disabled = false;
+            userInput.disabled = false;
+
+            userInput.focus();
+        }
+    }
+
+    async function handleQuestion(question) {
+
+        if (!question || !question.trim()) {
+            return;
+        }
+
+        const cleanQuestion = question.trim();
+        const normalizedQuestion = cleanQuestion.toLowerCase();
+
+        // Hiển thị câu hỏi của người dùng
+        addMessage(cleanQuestion, "user-message");
+
+        userInput.value = "";
+
+        // ==========================================
+        // 4 LENH NHANH - DUNG API NOI BO
+        // ==========================================
+
+        if (
+            normalizedQuestion === "doanh thu hôm nay"
+        ) {
+            await getTodayRevenue();
+            return;
+        }
+
+        if (
+            normalizedQuestion === "món bán chạy"
+        ) {
+            await getTopSellingDishes();
+            return;
+        }
+
+        if (
+            normalizedQuestion === "kiểm tra tồn kho"
+        ) {
+            await getInventorySummary();
+            return;
+        }
+
+        if (
+            normalizedQuestion === "phân tích kinh doanh"
+        ) {
+            await getBusinessAnalysis();
+            return;
+        }
+
+        // ==========================================
+        // CHAT TU DO -> GEMINI
+        // ==========================================
+
+        await askGemini(cleanQuestion);
+    }
+
+
+    // ==============================
+    // GUI BUTTON
+    // ==============================
+
+    sendButton.addEventListener(
+        "click",
+        async function () {
+
+            const question =
+                userInput.value;
+
+            userInput.value = "";
+
+            await handleQuestion(
+                question
+            );
+        }
+    );
+
+
+    // ==============================
+    // ENTER
+    // ==============================
+
+    userInput.addEventListener(
+        "keydown",
+        async function (event) {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                const question =
+                    userInput.value;
+
+                userInput.value = "";
+
+                await handleQuestion(
+                    question
+                );
+            }
+        }
+    );
+
+
+    // ==============================
+    // GOI Y
+    // ==============================
+
+    document
+        .querySelectorAll(".suggestion-btn")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    const question =
+                        this.innerText.trim();
+
+                    handleQuestion(question);
+                }
+            );
+       
+        });</script>

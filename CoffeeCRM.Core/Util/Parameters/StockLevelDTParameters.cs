@@ -1,0 +1,15 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CoffeeCRM.Core.Util.Parameters
+{
+    public class StockLevelDTParameters : DTParameters
+    {
+        public string SearchAll { get; set; } = "";
+        public int? WarehouseId { get; set; } = null;
+        public bool isWarning { get; set; } = false;
+    }
+}

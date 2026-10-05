@@ -1,0 +1,201 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/avatar/22c7af9d-49fc-4d5a-b415-0e0b24613e47.png",
+      "PackagePath": "staticwebassets/images/avatar/22c7af9d-49fc-4d5a-b415-0e0b24613e47.png"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/avatar/307ce493-b254-4b2d-8ba4-d12c080d6651.jpg",
+      "PackagePath": "staticwebassets/images/avatar/307ce493-b254-4b2d-8ba4-d12c080d6651.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/avatar/37fd4271-f2df-4f45-9ec9-e0e2d97aca42.png",
+      "PackagePath": "staticwebassets/images/avatar/37fd4271-f2df-4f45-9ec9-e0e2d97aca42.png"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/avatar/49cf701b-9051-450f-a2d4-9899acceca85.png",
+      "PackagePath": "staticwebassets/images/avatar/49cf701b-9051-450f-a2d4-9899acceca85.png"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/avatar/649da190-d313-4e24-8907-0c448e4f5fe1.jpg",
+      "PackagePath": "staticwebassets/images/avatar/649da190-d313-4e24-8907-0c448e4f5fe1.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/avatar/700969e7-8765-4374-8e01-cba6a77ffe19.png",
+      "PackagePath": "staticwebassets/images/avatar/700969e7-8765-4374-8e01-cba6a77ffe19.png"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/avatar/73814e7e-0f20-4feb-9f1a-5369fe321bd3.jpg",
+      "PackagePath": "staticwebassets/images/avatar/73814e7e-0f20-4feb-9f1a-5369fe321bd3.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/avatar/a324938e-ac1e-4bc7-baec-21424609d096.png",
+      "PackagePath": "staticwebassets/images/avatar/a324938e-ac1e-4bc7-baec-21424609d096.png"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/avatar/bd937940-6bae-4109-90c6-ffcd96f80127.jpg",
+      "PackagePath": "staticwebassets/images/avatar/bd937940-6bae-4109-90c6-ffcd96f80127.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/avatar/bf4f28ba-c301-4a4a-b785-6bd9022de1c6.jpg",
+      "PackagePath": "staticwebassets/images/avatar/bf4f28ba-c301-4a4a-b785-6bd9022de1c6.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/avatar/ce7684b1-c8e9-4635-9b71-9c71143019d4.jpg",
+      "PackagePath": "staticwebassets/images/avatar/ce7684b1-c8e9-4635-9b71-9c71143019d4.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/avatar/d6613330-6bb4-46d5-84a6-4c41e10bb0a5.png",
+      "PackagePath": "staticwebassets/images/avatar/d6613330-6bb4-46d5-84a6-4c41e10bb0a5.png"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/avatar/e6c8e07d-c0e5-47bb-a8f2-171e510f96ac.png",
+      "PackagePath": "staticwebassets/images/avatar/e6c8e07d-c0e5-47bb-a8f2-171e510f96ac.png"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/avatar/ed316367-c2b4-4c78-a177-f871b76b21ec.jpg",
+      "PackagePath": "staticwebassets/images/avatar/ed316367-c2b4-4c78-a177-f871b76b21ec.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/coffeedefault.jpg",
+      "PackagePath": "staticwebassets/images/coffeedefault.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/default/NoImage.png",
+      "PackagePath": "staticwebassets/images/default/NoImage.png"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/default/authdefaultimage.png",
+      "PackagePath": "staticwebassets/images/default/authdefaultimage.png"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/default/backgound.png",
+      "PackagePath": "staticwebassets/images/default/backgound.png"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/default/not-found.png",
+      "PackagePath": "staticwebassets/images/default/not-found.png"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dion/Dion-logo_wo_bg212.png",
+      "PackagePath": "staticwebassets/images/dion/Dion-logo_wo_bg212.png"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dion/dion-square-2.png",
+      "PackagePath": "staticwebassets/images/dion/dion-square-2.png"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dion/dion-square.png",
+      "PackagePath": "staticwebassets/images/dion/dion-square.png"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dion/favicon.ico",
+      "PackagePath": "staticwebassets/images/dion/favicon.ico"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/1616fda8-f94b-41ce-a055-5fe51d726c41.jpg",
+      "PackagePath": "staticwebassets/images/dish/1616fda8-f94b-41ce-a055-5fe51d726c41.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/1ffbb1c6-cf81-49fe-a624-e989c477dcdc.jpg",
+      "PackagePath": "staticwebassets/images/dish/1ffbb1c6-cf81-49fe-a624-e989c477dcdc.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/2bce45da-29e5-41be-93eb-bfbc38638c31.jpg",
+      "PackagePath": "staticwebassets/images/dish/2bce45da-29e5-41be-93eb-bfbc38638c31.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/31935506-012b-4373-aef5-fbaed32ece26.jpg",
+      "PackagePath": "staticwebassets/images/dish/31935506-012b-4373-aef5-fbaed32ece26.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/35ab114f-69f4-4b6c-a607-1341e58676d2.jpg",
+      "PackagePath": "staticwebassets/images/dish/35ab114f-69f4-4b6c-a607-1341e58676d2.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/3ae9bb68-fbc4-4bba-9ff1-fefae7ec4674.png",
+      "PackagePath": "staticwebassets/images/dish/3ae9bb68-fbc4-4bba-9ff1-fefae7ec4674.png"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/4014c561-e985-4f7a-95a3-85f42c15dc05.jpg",
+      "PackagePath": "staticwebassets/images/dish/4014c561-e985-4f7a-95a3-85f42c15dc05.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/4112ee03-0b77-48ec-93d3-fcad497a8a65.png",
+      "PackagePath": "staticwebassets/images/dish/4112ee03-0b77-48ec-93d3-fcad497a8a65.png"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/59225af5-6ac4-49bf-b88d-0733fdb929b5.png",
+      "PackagePath": "staticwebassets/images/dish/59225af5-6ac4-49bf-b88d-0733fdb929b5.png"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/76570edc-696b-4032-b028-720d0b2684c2.jpg",
+      "PackagePath": "staticwebassets/images/dish/76570edc-696b-4032-b028-720d0b2684c2.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/7bd5ef82-0693-4f7f-97d1-67f26c67b03a.jpg",
+      "PackagePath": "staticwebassets/images/dish/7bd5ef82-0693-4f7f-97d1-67f26c67b03a.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/8636b881-eea4-4250-955d-1a95e1705772.jpg",
+      "PackagePath": "staticwebassets/images/dish/8636b881-eea4-4250-955d-1a95e1705772.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/9102bbc2-5273-41ba-895e-e01302b3a73b.png",
+      "PackagePath": "staticwebassets/images/dish/9102bbc2-5273-41ba-895e-e01302b3a73b.png"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/9768691a-aa8f-4338-a8a6-0a0bdc7e97f8.jpg",
+      "PackagePath": "staticwebassets/images/dish/9768691a-aa8f-4338-a8a6-0a0bdc7e97f8.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/a22f58ba-510a-4248-af1c-618c79ccf46c.jpg",
+      "PackagePath": "staticwebassets/images/dish/a22f58ba-510a-4248-af1c-618c79ccf46c.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/a70463d1-e453-410f-94ae-76ffb4d56929.jpg",
+      "PackagePath": "staticwebassets/images/dish/a70463d1-e453-410f-94ae-76ffb4d56929.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/c0273eb3-edf6-4a40-b737-e09f40516e39.jpg",
+      "PackagePath": "staticwebassets/images/dish/c0273eb3-edf6-4a40-b737-e09f40516e39.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/d5db3073-bdf7-49a7-a6f3-6026e5486b08.jpg",
+      "PackagePath": "staticwebassets/images/dish/d5db3073-bdf7-49a7-a6f3-6026e5486b08.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/ea7262b4-d191-4e16-813e-77f80483a696.jpeg",
+      "PackagePath": "staticwebassets/images/dish/ea7262b4-d191-4e16-813e-77f80483a696.jpeg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/f08f190d-911b-4b7f-9f9a-efcc35a474f4.jpg",
+      "PackagePath": "staticwebassets/images/dish/f08f190d-911b-4b7f-9f9a-efcc35a474f4.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/dish/f12fbf58-128a-4f3e-ae8f-a86824f1b149.jpg",
+      "PackagePath": "staticwebassets/images/dish/f12fbf58-128a-4f3e-ae8f-a86824f1b149.jpg"
+    },
+    {
+      "Id": "/Users/tanduy/Projects/CfCRM.DATN/CoffeeCRM.Api/wwwroot/images/userdefault.jpg",
+      "PackagePath": "staticwebassets/images/userdefault.jpg"
+    },
+    {
+      "Id": "obj/Debug/net6.0/staticwebassets/msbuild.CoffeeCRM.Api.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net6.0/staticwebassets/msbuild.build.CoffeeCRM.Api.props",
+      "PackagePath": "build\\CoffeeCRM.Api.props"
+    },
+    {
+      "Id": "obj/Debug/net6.0/staticwebassets/msbuild.buildMultiTargeting.CoffeeCRM.Api.props",
+      "PackagePath": "buildMultiTargeting\\CoffeeCRM.Api.props"
+    },
+    {
+      "Id": "obj/Debug/net6.0/staticwebassets/msbuild.buildTransitive.CoffeeCRM.Api.props",
+      "PackagePath": "buildTransitive\\CoffeeCRM.Api.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
